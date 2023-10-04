@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="index.js" defer></script>
+  <title>Frontend Mentor | Tip calculator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+  <h1>SPLI<br/>TTER</h1>
+  <div class="general container">
+    <div class="inputs container">
+        <label class="bill">
+          Bill
+          <input type="number" inputmode="numeric" name="bill">
+        </label>
+        <label class="tip-select">
+          <input type="checkbox" id="5%" name="tip" value="5%">
+          <label for="5%">5%</label>
+          <input type="checkbox" id="10%" name="tip" value="10%">
+          <label for="10%">10%</label>
+          <input type="checkbox" id="15%" name="tip" value="15%">
+          <label for="15%">15%</label>
+          <input type="checkbox" id="25%" name="tip" value="25%">
+          <label for="25%">25%</label>
+          <input type="checkbox" id="50%" name="tip" value="50%">
+          <label for="50%">50%</label>
+          <input type="checkbox" id="Custom" name="tip" value="Custom">
+          <label for="Custom">Custom</label>
+        </label>
+        <label class="people-count">
+          Number of People
+          <input type="number" name="people-count">
+        </label>
+    </div>
+    <div class="results container">
+      <div class="tip amount"></div>
+      <div class="total amount"></div>
+      <button class="reset">Reset</button>
+    </div>
+  </div>
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+</body>
+</html>
