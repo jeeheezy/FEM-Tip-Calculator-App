@@ -4,82 +4,34 @@ const tipInput = document.querySelectorAll("input[type=checkbox]");
 const reset = document.querySelector(".button");
 let currentTip;
 let currentValue = "0";
-let cursorPosition;
-// let cursorPosition = 0;
 
 function billInputValidation(event) {
-    cursorPosition = this.selectionStart;
-    if (!/[0-9]|Backspace|ArrowLeft|ArrowRight|Delete/.test(event.key)) {
+    if (!/[0-9]|Backspace|Delete/.test(event.key)) {
         event.preventDefault();
     } 
     const pressedValue = event.key
-    if (currentValue == "0") {
-        // separate function for 0 here
-        if (/[0-9]/.test(event.key)) {
-            event.preventDefault()
-            const newValue = (Number(pressedValue)/100).toFixed(2);
-            billInput.value = newValue
-            currentValue = newValue
-            this.setSelectionRange(4, 4);
+    if (/[0-9]/.test(event.key)) {
+        event.preventDefault()
+        if (currentValue.includes(".")) {
+            currentValue = currentValue.replace(".","");
+        }
+        currentValue = currentValue + pressedValue
+        const newValue = (Number(currentValue)/100).toFixed(2);
+        billInput.value = newValue
+        currentValue = newValue
+    }
+    if (/Backspace|Delete/.test(event.key)) {
+        event.preventDefault();
+        if (currentValue.includes(".")) {
+            currentValue = currentValue.replace(".","");
+        }
+        currentValue = currentValue.slice(0, -1);
+        const newValue = (Number(currentValue)/100).toFixed(2);
+        billInput.value = newValue
+        if (billInput.value == '0.00') {
+            billInput.value = "";
         }
     }
-    else {
-        if (/[0-9]/.test(event.key)) {
-            event.preventDefault()
-            const billLength = currentValue.length;
-            let tempValue;
-            if (currentValue.includes(".")) {
-                currentValue = currentValue.replace(".","");
-            }
-            // because using slice, if decimal was to be included then it might get included or excluded in slice which could alter the proper position according to cursor and insertion
-            // this works if working after decimal
-            if (cursorPosition >= billLength-2) {
-                tempValue = currentValue.slice(0, cursorPosition) + pressedValue + currentValue.slice(cursorPosition -1)
-            }
-            // this works if working before decimal
-            else {
-                tempValue = currentValue.slice(0, cursorPosition) + pressedValue + currentValue.slice(cursorPosition);
-            }
-            const newValue = (Number(tempValue)/100).toFixed(2);
-            billInput.value = newValue
-            currentValue = newValue
-            // if (cursorPosition != billInput.value.length) {
-            //     this.setSelectionRange(cursorPosition+1,cursorPosition+1);
-            // }
-            
-            // const newCursorPosition = this.selectionEnd + 1;
-            // this.setSelectionRange(newCursorPosition, newCursorPosition)
-        }
-        if (/Backspace|Delete/.test(event.key)) {
-            event.preventDefault();
-            if (currentValue.includes(".")) {
-                currentValue.replace(".","");
-            }
-            // currentValue = currentValue.slice(0, -1);
-            // currentValue = currentValue.slice(0, cursorPosition-1) + currentValue.slice(cursorPosition)
-            currentValue = currentValue.substring(0, cursorPosition) + currentValue.substring(cursorPosition,currentValue.length)
-            const newValue = (Number(currentValue)/100).toFixed(2);
-            billInput.value = newValue
-            if (billInput.value == '0.00') {
-                billInput.value = "";
-            }
-            // const newCursorPosition = this.selectionEnd + 1;
-            // this.setSelectionRange(newCursorPosition, newCursorPosition)
-        }
-    }
-    if (/ArrowLeft/.test(event.key)) {
-        if (cursorPosition != 0) {
-            cursorPosition = cursorPosition - 1;
-            // this.setSelectionRange(newCursorPosition, newCursorPosition)
-        }
-    }
-    if (/ArrowRight/.test(event.key)) {
-        if (cursorPosition != billInput.value.length) {
-            cursorPosition = cursorPosition + 1;
-        // this.setSelectionRange(newCursorPosition, newCursorPosition)
-        }
-    }
-    console.log(cursorPosition);
 }
 
 function oneCheckbox(event) {
@@ -118,12 +70,6 @@ function tipFunctions(e) {
     splitBill();
 }
 
-function clickCursorPosition (e) {
-    cursorPosition = this.selectionStart;
-    console.log(this)
-    console.log(cursorPosition);
-}
-
 
 // billInput.addEventListener('keydown', function(event) {
 //     // if (!/[0-9\b\d\.\-\+]/.test(event.key)) {
@@ -133,7 +79,6 @@ function clickCursorPosition (e) {
 //         event.preventDefault();
 //     }
 // })
-billInput.addEventListener('click', cursorPosition);
 billInput.addEventListener('keydown',billInputValidation);
 // peopleInput.addEventListener('input',splitBill);
 tipInput.forEach((tip) => {
