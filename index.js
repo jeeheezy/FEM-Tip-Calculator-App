@@ -15,7 +15,11 @@ function billInputValidation(event) {
     const pressedValue = event.key
     if (currentValue == "0") {
         // separate function for 0 here
-        if (currentValue == "0") {
+        if (/[0-9]/.test(event.key)) {
+            event.preventDefault()
+            const newValue = (Number(pressedValue)/100).toFixed(2);
+            billInput.value = newValue
+            currentValue = newValue
             this.setSelectionRange(4, 4);
         }
     }
@@ -25,7 +29,7 @@ function billInputValidation(event) {
             const billLength = currentValue.length;
             let tempValue;
             if (currentValue.includes(".")) {
-                currentValue.replace(".","");
+                currentValue = currentValue.replace(".","");
             }
             // because using slice, if decimal was to be included then it might get included or excluded in slice which could alter the proper position according to cursor and insertion
             // this works if working after decimal
@@ -39,9 +43,9 @@ function billInputValidation(event) {
             const newValue = (Number(tempValue)/100).toFixed(2);
             billInput.value = newValue
             currentValue = newValue
-            if (cursorPosition != billInput.value.length) {
-                this.setSelectionRange(cursorPosition+1,cursorPosition+1);
-            }
+            // if (cursorPosition != billInput.value.length) {
+            //     this.setSelectionRange(cursorPosition+1,cursorPosition+1);
+            // }
             
             // const newCursorPosition = this.selectionEnd + 1;
             // this.setSelectionRange(newCursorPosition, newCursorPosition)
@@ -76,10 +80,6 @@ function billInputValidation(event) {
         }
     }
     console.log(cursorPosition);
-}
-
-function updateBill(event) {
-
 }
 
 function oneCheckbox(event) {
