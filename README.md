@@ -14,9 +14,7 @@ This is a solution to the [Tip calculator app challenge on Frontend Mentor](http
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
@@ -30,20 +28,15 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it. 
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+![Mobile Screenshot](./images/Mobile-screenshot.png)
+![Desktop Screenshot Empty](./images/Desktop-screenshot-empty.png)
+![Desktop Screenshot Active States 1](./images/Desktop-screenshot-active1.png)
+![Desktop Screenshot Active States 2](./images/Desktop-screenshot-active2.png)
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [https://github.com/jeeheezy/FEM-Tip-Calculator-App](https://github.com/jeeheezy/FEM-Tip-Calculator-App)
+- Live Site URL: [https://jeeheezy.github.io/FEM-Tip-Calculator-App/](https://jeeheezy.github.io/FEM-Tip-Calculator-App/)
 
 ## My process
 
@@ -54,59 +47,30 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 - Flexbox
 - CSS Grid
 - Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+- Vanilla Javascript
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+This project reminded me of some points of Javascript that I had to be mindful of, like using a for loop instead of a forEach if I'm planning on breaking out of the loop, or declaring event.preventDefault when doing input validation to not get double inputs.
 
-To see how you can add code snippets, see below:
+The input validation probably made the project a bit more challenging than it needed to be. Instead of simply having a simple input field to enter in the number of people or the bill amount, I wanted a system any monetary values entered would automatically have two decimal points listed, similar to how QuickPay by Zelle works. In addition to manipulating the inputs to add in the decimal points, I also found the validation coming from using input type=number to be somewhat lackluster for this situation, since you could enter in e or + or - characters to denote exponents. Because I wanted to avoid these sort of situations, I ended up using preventDefault on all keydown events and specified my own logic using regex. 
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
-}
-```
+However, specifying my own logic also has created some limitations within the text field. One big problem is not being able to copy, cut, or paste any character to or within the input fields, since any non-numeric characters save for Backspace and Delete would not do anything. Another issue was that by automatically adding in the decimals and changing the input value of the text fields, I could not appropriately trigger an input event since input changes made within Javascript does not call trigger the event listener. This made me resort to keydown events a lot more often, which may not be most ideal for the project, but I couldn't seem to find a better workaround. Lastly, I decided to only allow characters to be added or deleted from the right end of the input fields. This was done since specifying my own logic for what the input fields should display meant that the cursor position had to also be manually calculated to properly add a character at the cursor position. I gave this a try initially, but ended up reverting to the decision to only allow characters on the right regardless of cursor position since there were so many edge cases to consider for adding decimals and adding or removing characters depending on the number of characters already present. See commit ae8e316 if you'd like to see my failed attempt to calculate and set cursor positions.
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+The project also served to teach me more about the distinction of radio buttons and checkboxes, and the limitations of each. Initially, I had considered using radio buttons for selecting tips since I wanted to only allow once selection, but ended up going with checkboxes and specifying logic to only allow one checkbox at a time since styling with CSS was much more accessible to checkboxes than to radio buttons.
 
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+Since this project was more Javascript heavy compared to other projects I've done so far, it was a good opportunity to troubleshoot and debug using both console.log and setting breakpoints in the developer tool. 
+
 
 ### Continued development
-
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+One thing a friend had noted was considering using classes or otherwise to separate my functions in the Javascript file to multiple files to help with the difficulty with navigating the file at times. I'm pretty unfamiliar with classes and class constructors still, so would definitely like to make use of them. Another development lesson I'd like to consider for the future is learning to manipulate and validate copy/pasted strings and clipboards as well adjusting cursor position since those felt like the two big failures of the project so far.
 
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+- [Stackoverflow](https://stackoverflow.com/) - Stackoverflow is always a helpful resource when dealing with questions with code, and was especially helpful this project when trying to determine the differences between certain events like keypress vs keydown, learning the different types of html input types, and manipulating/setting cursor positions.
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
+- LinkedIn - [Jeeho Lee](https://www.linkedin.com/in/jeeho-lee-719852182/)
+- Frontend Mentor - [@jeeheezy](https://www.frontendmentor.io/profile/jeeheezy)
 
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
-
-## Acknowledgments
-
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**

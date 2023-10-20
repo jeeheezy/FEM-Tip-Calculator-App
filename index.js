@@ -188,11 +188,3 @@ customTipInput.addEventListener('focusout', ()=> {
 })
 customTipInput.addEventListener('keydown', splitBill);
 reset.addEventListener('click', resetAll)
-
-// https://stackoverflow.com/questions/12114570/how-to-align-texts-inside-of-an-input
-// https://stackoverflow.com/questions/917610/put-icon-inside-input-element-in-a-form
-// https://stackoverflow.com/questions/58606047/how-to-use-on-addeventlistener-on-radio-button-in-plain-javascript
-// https://stackoverflow.com/questions/9709209/html-select-only-one-checkbox-in-a-group
-// https://stackoverflow.com/questions/31706611/why-does-the-html-input-with-type-number-allow-the-letter-e-to-be-entered-in
-// https://stackoverflow.com/questions/56467473/differences-between-input-and-keypress-events
-// should trigger with keypress instead of change, see https://stackoverflow.com/questions/13525958/what-are-the-differences-between-keypress-and-change-in-javascript
