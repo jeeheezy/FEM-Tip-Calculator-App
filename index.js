@@ -79,7 +79,6 @@ function calculateTip() {
             if (tip.value === "Custom") {
                 document.querySelector("label[for='Custom']").style.display = "none"
                 customTipInput.style.display = "block"
-                customTipInput.focus();
             } else {
                 clearCustomTip()
                 currentTip = Number(billInput.value) * (parseFloat(tip.value)/100);
@@ -141,6 +140,7 @@ function clearCustomTip() {
 function tipFunctions(e) {
     oneCheckbox(e);
     splitBill();
+    customTipInput.focus();
 }
 
 function billFunctions(e) {
