@@ -192,6 +192,11 @@ label[for="Custom"] {
     cursor: pointer;
 }
 
+.no-reset {
+    background-color: hsl(183, 100%, 21%);
+    color: var(--very-dark-cyan);
+}
+
 @media (min-width: 32rem) {
     .tip-select {
         grid-template-columns: 6rem 6rem 6rem;
@@ -219,6 +224,10 @@ label[for="Custom"] {
         box-sizing: border-box;
         flex: 1 1 50%;
         max-width: 16.25rem;
+    }
+
+    label[for="Custom"] {
+        text-align: center;
     }
 
     .results {

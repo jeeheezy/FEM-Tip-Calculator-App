@@ -7,6 +7,7 @@ let currentTip = 0;
 let tipPerPerson;
 let costPerPerson;
 let errorFlag = false;
+let resetFlag = false;
 
 function monetaryInputValidation(event, input) {
     if (!/[0-9]|Backspace|Delete/.test(event.key)) {
@@ -84,18 +85,28 @@ function calculateTip() {
                 currentTip = Number(billInput.value) * (parseFloat(tip.value)/100);
             }
             tipFound = true;
+            resetFlag = true;
             break;        
         }
     } 
     if (!tipFound) {
         clearCustomTip();
         currentTip = 0;
+        resetFlag = false;
     }
 }
 
+function clearCustomTip() {
+    customTipInput.style.display = "none"
+    customTipInput.value = "";
+    document.querySelector("label[for='Custom']").style.display = "block"
+    resetFlag = false;
+    resetEval();
+}
 
 function splitBill () {
     calculateTip();
+    resetEval();
     if (customTipInput.style.display === "block") {
         currentTip = Number(customTipInput.value)
     }
@@ -111,6 +122,14 @@ function splitBill () {
     document.querySelector(".total").innerHTML = costPerPerson;
 }
 
+function resetEval() {
+    if (billInput.value == "" && peopleInput.value == "" && resetFlag == false){
+        reset.classList.add("no-reset")
+    } else {
+      reset.classList.remove("no-reset")
+    }
+}
+
 function resetAll() {
     billInput.value = "";
     peopleInput.value = "";
@@ -120,7 +139,9 @@ function resetAll() {
     clearZeroPeopleError();
     clearCustomTip();
     document.querySelector(".tip").innerHTML = "$0.00";
-    document.querySelector(".total").innerHTML = "$0.00"
+    document.querySelector(".total").innerHTML = "$0.00";
+    resetFlag = false;
+    reset.classList.add("no-reset");
 }
 
 function oneCheckbox(event) {
@@ -129,12 +150,6 @@ function oneCheckbox(event) {
             tip.checked = false;
         }
     })
-}
-
-function clearCustomTip() {
-    customTipInput.style.display = "none"
-    customTipInput.value = "";
-    document.querySelector("label[for='Custom']").style.display = "block"
 }
 
 function tipFunctions(e) {
