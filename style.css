@@ -93,6 +93,9 @@ label {
 
 .custom-tip {
     margin: 0;
+    background-image: url(./images/icon-dollar.svg);
+    background-repeat: no-repeat;
+    background-position: top 50% left 0.2rem;
 }
 
 .bill {
